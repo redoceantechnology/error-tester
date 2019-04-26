@@ -1,12 +1,13 @@
 const http = require('http');
 
 var i = 0;
+var ERROR_THRESHOLD = 5;
 
 http.createServer(function (req, res) {
-    if (i > 5) {
+    if (i > ERROR_THRESHOLD) {
         res.writeHead(500, {'Content-type': 'text/plain'});
         res.write("Error");
-        i= 0;
+        i = 0; //resets the counter
     }
     else {
         res.writeHead(200, {'Content-type': 'text/plain'});

@@ -2,6 +2,15 @@ const http = require('http');
 
 var i = 0;
 var ERROR_THRESHOLD = 5;
+try
+{
+    require('/opt/dynatrace-oneagent-7.2//agent/bin/any/onenodeloader.js')({
+        server: 'https://<CollectorName>:8043',
+        agentName: '<AgentName>'
+    });
+} catch (err) {
+    console.error(err.toString());
+}
 
 http.createServer(function (req, res) {
     if (i > ERROR_THRESHOLD) {

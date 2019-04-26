@@ -1,10 +1,12 @@
 const http = require('http');
 
 var i = 0;
-var ERROR_THRESHOLD = 5;
-try
-{
-    require('/opt/dynatrace-oneagent-7.2//agent/bin/any/onenodeloader.js')({
+var err = 0;
+var ERROR_THRESHOLD = 7;
+var RANDOM = randomInt(5, 15);
+
+try {
+    require('C:\\Program Files\\Dynatrace\\dynatrace-oneagent-7.2\\agent\\bin\\any\\onenodeloader.js')({
         server: 'https://localhost:8043',
         agentName: 'Test_NodeJS'
     });
@@ -13,12 +15,16 @@ try
 }
 
 http.createServer(function (req, res) {
-    if (i > ERROR_THRESHOLD) {
+    if (i === RANDOM) {
         res.writeHead(500, {'Content-type': 'text/plain'});
         res.write("Error");
-        i = 0; //resets the counter
-    }
-    else {
+        err++;
+        if (err === ERROR_THRESHOLD) {
+            i = 0; //resets the counter
+            err = 0;
+            RANDOM = randomInt(5, 15);
+        }
+    } else {
         res.writeHead(200, {'Content-type': 'text/plain'});
         res.write("OK");
         i++;

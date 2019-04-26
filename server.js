@@ -5,8 +5,8 @@ var ERROR_THRESHOLD = 5;
 try
 {
     require('/opt/dynatrace-oneagent-7.2//agent/bin/any/onenodeloader.js')({
-        server: 'https://<CollectorName>:8043',
-        agentName: '<AgentName>'
+        server: 'https://localhost:8043',
+        agentName: 'Test_NodeJS'
     });
 } catch (err) {
     console.error(err.toString());
